@@ -2,33 +2,43 @@
 
 $(document).ready(function () {
 
+  $('#name').focus();
+
+
+  // Will change change of inputs
   function checkField(field) {
     if (field.value === '') {
       $(field).addClass('failed');
-    } else {
+    } else if (field.value !== undefined) {
       $(field).addClass('success');
     }
   }
 
-  $('form input[type=text], input[type=email]').on('focusout', function (event) {
+  // Function checkField is ran on all inputs
+  $('input[type=text], input[type=email]').on('focusout', function (event) {
     const field = event.target;
     event.preventDefault();
     checkField(field);
-    if ($('input[type=text]').hasClass('success') && $('input[type=email]').hasClass('success')) {
-      $('#title').prop('disabled', false);
+  });
+
+  // Title selector will show new html element on if condition is met
+  $('#title').on('change', function () {
+    const condition = $('select[name="user_title"]').val();
+    if (condition === 'other') {
+      $('#other-title').removeClass('hidden');
+    } else if (condition !== 'other') {
+      $('#other-title').addClass('hidden');
     }
   });
 
-  $('#title').on('change', function (event) {
-    $('#size').prop('disabled', false);
-  });
-
+  // HTML element shows on change
   $('#size').on('change', function (event) {
-    $('#design').prop('disabled', false);
+    $('#design').parent().removeClass('hidden');
   });
 
-  $('#design').on('change', function (event) {
-    $('#color').prop('disabled', false);
+  // HTML element shows on change, certain themes are shown in selection list depending on choice
+  $('#size, #design').on('change', function (event) {
+    $('#color').parent().removeClass('hidden');
     const select = $('optgroup[label="Select Theme"] option:selected').val();
     if (select === 'js puns') {
       $('optgroup[value="js puns"]').addClass('show');
@@ -38,11 +48,9 @@ $(document).ready(function () {
       $('optgroup[value="js puns"]').removeClass('show');
     }
 
-    if ($('#color option:selected').val() !== undefined) {
-      $('input[type="checkbox"]:disabled').prop('disabled', false);
-    }
   });
 
+  // Checkboxes are disabled if times are competing, price is dynamically changed based on user selection
   $('input[type=checkbox]').on('change', function (event) {
     const total_price = $('#total_price');
     let price = $(this).parent().text().split(' ');
@@ -75,46 +83,13 @@ $(document).ready(function () {
     }
 
     total_price.text(`$${total}`);
-    if ($('input[type="checkbox"]').prop('checked') !== undefined) {
-      $('#payment').prop('disabled', false);
-    }
 
   });
 
+  // Depending on selection HTML elemtns will be shown or removed on choice
   $('#payment').on('change', function (event) {
-    $('#cc-num').prop('disabled', false);
-  });
-
-  $('#cc-num').on('focusout', function (event) {
-    const field = event.target;
-    event.preventDefault();
-    checkField(field);
-
-    if ($('#cc-num').hasClass('success')) {
-      $('#zip').prop('disabled', false);
-      $('#cvv').prop('disabled', false);
-    }
-
-  });
-
-  $('#cvv').on('focusout', function (event) {
-    const field = event.target;
-    event.preventDefault();
-    checkField(field);
-    if ($('#cvv').hasClass('success')) {
-      $('#exp-month').prop('disabled', false);
-      $('#exp-year').prop('disabled', false);
-    }
-  });
-
-  $('#exp-year').on('change', function (event) {
-    $('button').prop('disabled', false);
-  });
-
-  $('#payment').on('change', function (event) {
-    event.preventDefault();
     const CREDIT_CARD = $('#payment option:selected').val();
-    console.log(CREDIT_CARD);
+
     if (CREDIT_CARD === 'credit card') {
       $('div[value="credit-card"]').removeClass('hidden');
       $('div[value="paypal"]').addClass('hidden');

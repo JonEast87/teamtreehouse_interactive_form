@@ -32,7 +32,7 @@
         <input type="email" id="mail" name="user_email">
 
         <label for="title">Job Role</label>
-        <select id="title" name="user_title" disabled>
+        <select id="title" name="user_title">
           <option disabled selected value> -- select job title -- </option>
           <optgroup label="Professional Developer">
             <option value="back-end developer">Backend Developer</option>
@@ -46,6 +46,7 @@
             <option value="other">Other</option>
           </optgroup>
         </select>
+        <input type="text" id="other-title" class="hidden" placeholder="Your Title">
       </fieldset>
 
       <fieldset class="shirt">
@@ -53,7 +54,7 @@
 
         <div>
           <label for="size">Size:</label>
-          <select id="size" name="user_size" disabled>
+          <select id="size" name="user_size">
             <option disabled selected value> -- select size -- </option>
             <option value="small">Extra Small</option>
             <option value="small">Small</option>
@@ -63,9 +64,9 @@
           </select>
         </div>
 
-        <div>
+        <div class="hidden">
           <label for="design">Design:</label>
-          <select id="design" name="user_design" disabled>
+          <select id="design" name="user_design">
             <option disabled selected value> -- select themes -- </option>
             <optgroup label="Select Theme">
               <option value="js puns">JS Puns</option>
@@ -74,9 +75,9 @@
           </select>
         </div>
 
-        <div id="colors-js-puns" class="">
+        <div id="colors-js-puns" class="hidden">
           <label for="color">Color:</label>
-          <select id="color" disabled>
+          <select id="color">
             <option disabled selected value> -- select coloring -- </option>
             <optgroup label="JavaScript Puns" value="js puns">
               <option value="cornflowerblue">Cornflower Blue</option>
@@ -95,19 +96,19 @@
       <fieldset id="classes" class="activities">
         <legend>Register for Activities</legend>
         <label>
-          <input type="checkbox" name="all" disabled> Main Conference — $200</label>
+          <input type="checkbox" name="all"> Main Conference — $200</label>
         <label>
-          <input type="checkbox" name="js-frameworks" disabled> JavaScript Frameworks Workshop — Tuesday 9am-12pm, $100</label>
+          <input type="checkbox" name="js-frameworks"> JavaScript Frameworks Workshop — Tuesday 9am-12pm, $100</label>
         <label>
-          <input type="checkbox" name="js-libs" disabled> JavaScript Libraries Workshop — Tuesday 1pm-4pm, $100</label>
+          <input type="checkbox" name="js-libs"> JavaScript Libraries Workshop — Tuesday 1pm-4pm, $100</label>
         <label>
-          <input type="checkbox" name="express" disabled> Express Workshop — Tuesday 9am-12pm, $100</label>
+          <input type="checkbox" name="express"> Express Workshop — Tuesday 9am-12pm, $100</label>
         <label>
-          <input type="checkbox" name="node" disabled> Node.js Workshop — Tuesday 1pm-4pm, $100</label>
+          <input type="checkbox" name="node"> Node.js Workshop — Tuesday 1pm-4pm, $100</label>
         <label>
-          <input type="checkbox" name="build-tools" disabled> Build tools Workshop — Wednesday 9am-12pm, $100</label>
+          <input type="checkbox" name="build-tools"> Build tools Workshop — Wednesday 9am-12pm, $100</label>
         <label>
-          <input type="checkbox" name="npm" disabled> npm Workshop — Wednesday 1pm-4pm, $100</label>
+          <input type="checkbox" name="npm"> npm Workshop — Wednesday 1pm-4pm, $100</label>
 
         <label>Total Price:
           <span id="total_price">0</span>
@@ -118,7 +119,7 @@
         <legend>Payment Info</legend>
 
         <label for="payment">I'm going to pay with:</label>
-        <select id="payment" name="user_payment" disabled>
+        <select id="payment" name="user_payment">
           <option value="credit card" selected>Credit Card</option>
           <option value="paypal">PayPal</option>
           <option value="bitcoin">Bitcoin</option>
@@ -128,21 +129,21 @@
 
           <div class="col-6 col">
             <label for="cc-num">Card Number:</label>
-            <input id="cc-num" name="user_cc-num" type="text" disabled>
+            <input id="cc-num" name="user_cc-num" type="text">
           </div>
 
           <div class="col-3 col">
             <label for="zip">Zip Code:</label>
-            <input id="zip" name="user_zip" type="text" disabled>
+            <input id="zip" name="user_zip" type="text">
           </div>
 
           <div class="col-3 col">
             <label for="cvv">CVV:</label>
-            <input id="cvv" name="user_cvv" type="text" disabled>
+            <input id="cvv" name="user_cvv" type="text">
           </div>
 
           <label for="exp-month">Expiration Date:</label>
-          <select id="exp-month" name="user_exp-month" disabled>
+          <select id="exp-month" name="user_exp-month">
             <option disabled selected value> -- select month -- </option>
             <option value="1">1 - January</option>
             <option value="2">2 - February</option>
@@ -158,7 +159,7 @@
             <option value="12">12 - December</option>
           </select>
           <label for="exp-year">Expiration Year:</label>
-          <select id="exp-year" name="user_exp-year" disabled>
+          <select id="exp-year" name="user_exp-year">
             <option disabled selected value> -- select year -- </option>
             <option value="2016">2016</option>
             <option value="2017">2017</option>
@@ -180,7 +181,7 @@
 
       </fieldset>
 
-      <button type="submit" disabled>Register</button>
+      <button type="submit">Register</button>
 
     </form>
 

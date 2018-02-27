@@ -81,7 +81,8 @@ select {
 	margin-bottom: 1.125em;
 }
 
-input {
+input,
+select {
 	font-size: 1em;
 	font-weight: 500;
 	padding: .8em;

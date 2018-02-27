@@ -24,15 +24,15 @@ Requirements
 
 - [ ] Display error messages and don't let the user submit the form if any of these validation errors exist:
 
-..* Name field can't be empty
+  - Name field can't be empty
 
-..* Email field must be a validly formatted e-mail address (you don't have to check that it's a real e-mail address, just that it's formatted like one: dave@teamtreehouse.com for example. You'll need to use a regular expression to get this requirement. See the list of Resources for links to learn about regular expressions.
+  - Email field must be a validly formatted e-mail address (you don't have to check that it's a real e-mail address, just that it's formatted like one: dave@teamtreehouse.com for example. You'll need to use a regular expression to get this requirement. See the list of Resources for links to learn about regular expressions.
 
-..* At least one activity must be checked from the list under "Register for Actitivities."
+  - At least one activity must be checked from the list under "Register for Actitivities."
 
-..* Payment option must be selected.
+  - Payment option must be selected.
 
-..* If "Credit card" is the selected payment option, make sure the user supplied a credit card number, a zip code, and a 3 number CVV value.
+  - If "Credit card" is the selected payment option, make sure the user supplied a credit card number, a zip code, and a 3 number CVV value.
 
 Extra Credit
 -----------------

@@ -22,7 +22,7 @@ Requirements
 
 - [X] When a user selects the "Bitcoin" payment option, display the Bitcoin information, and hide the credit card information.
 
-- [ ] Display error messages and don't let the user submit the form if any of these validation errors exist:
+- [X] Display error messages and don't let the user submit the form if any of these validation errors exist:
 
   - Name field can't be empty
 

@@ -7,9 +7,14 @@ $(document).ready(function (event) {
     DESIGN = $('#design'),
     PAYMENT = $('#payment'),
     ZIPCODE = $('input[name=user_zip]'),
-    CCNUMBER = $('input[name=user_cvv]'),
+    CVVNUMBER = $('input[name=user_cvv]'),
     CHECKBOXES = $('input[type=checkbox]'),
     CREDITCARD = $('input[name=user_cc-num]');
+
+  let nameCondition = false,
+    emailCondition = false,
+    activityCondition = false,
+    paymentCondition = false;
 
   $('#name').focus();
 
@@ -28,6 +33,7 @@ $(document).ready(function (event) {
   function checkUserName(SELECTED) {
     const USERNAMECHECK = /^[a-zA-Z]+([_ -]?[a-zA-Z])*$/;
     if (USERNAMECHECK.test($(SELECTED).val())) {
+      nameCondition = true;
       return trueOrNot(true, SELECTED);
     } else if (!USERNAMECHECK.test($(SELECTED).val())) {
       return trueOrNot(false, SELECTED);
@@ -38,6 +44,7 @@ $(document).ready(function (event) {
   function checkEmail(SELECTED) {
     const EMAILCHECK = /\S+@\S+\.\S+/;
     if (EMAILCHECK.test($(SELECTED).val())) {
+      emailCondition = true;
       return trueOrNot(true, SELECTED);
     } else if (!EMAILCHECK.test($(SELECTED).val())) {
       return trueOrNot(false, SELECTED);
@@ -75,12 +82,12 @@ $(document).ready(function (event) {
   }
 
   // handler for username
-  $(USERNAME).on('focusout', function (event) {
+  $(USERNAME).on('focusout', function () {
     checkUserName(USERNAME);
   });
 
   // handler for email
-  $(EMAIL).on('focusout', function (event) {
+  $(EMAIL).on('focusout', function () {
     checkEmail(EMAIL);
   });
 
@@ -95,12 +102,12 @@ $(document).ready(function (event) {
   });
 
   // new HTML element shows dynamically
-  $(SIZE).on('change', function (event) {
+  $(SIZE).on('change', function () {
     $(DESIGN).parent().removeClass('hidden');
   });
 
   // color options change based on what the user picks for their shirt design
-  $(DESIGN).on('change', function (event) {
+  $(DESIGN).on('change', function () {
     $('#color').parent().removeClass('hidden');
     const select = $('optgroup[label="Select Theme"] option:selected').val();
     if (select === 'js puns') {
@@ -113,7 +120,7 @@ $(document).ready(function (event) {
   });
 
   // boxes are disabled if times are competing, price is dynamically changed based on user selection
-  $(CHECKBOXES).on('change', function (event) {
+  $(CHECKBOXES).on('change', function () {
     const total_price = $('#total_price');
     let price = $(this).parent().text().split(' ');
     let selectedPrice = parseInt(price.pop().replace(/([^0-9\\.])/g, ""));
@@ -143,11 +150,12 @@ $(document).ready(function (event) {
         $('input[name="js-libs"]').prop('disabled', false);
       }
     }
+    activityCondition = true;
     total_price.text(`$${total}`);
   });
 
   // depending on selection HTML elemtns will be shown or removed on choice
-  $(PAYMENT).on('change', function (event) {
+  $(PAYMENT).on('change', function () {
     const CREDIT_CARD = $('#payment option:selected').val();
 
     if (CREDIT_CARD === 'credit card') {
@@ -163,21 +171,52 @@ $(document).ready(function (event) {
       $('div[value="paypal"]').addClass('hidden');
       $('div[value="credit-card"]').addClass('hidden');
     }
+    paymentCondition = true;
   });
 
   // handler for creditcard
-  $(CREDITCARD).on('focusout', function (event) {
+  $(CREDITCARD).on('focusout', function () {
     checkCreditCard(CREDITCARD);
   });
 
   // handler for zipcode
-  $(ZIPCODE).on('focusout', function (event) {
+  $(ZIPCODE).on('focusout', function () {
     checkZipCode(ZIPCODE);
   });
 
   // handler for ccnumber
-  $(CCNUMBER).on('focusout', function (event) {
-    checkSecurityNumber(CCNUMBER);
+  $(CVVNUMBER).on('focusout', function () {
+    checkSecurityNumber(CVVNUMBER);
+  });
+
+  // ensures all necessary fields are validated and contain the correct input according to README.md
+  $('form').on('submit', function (event) {
+    event.preventDefault();
+
+    if (nameCondition === false) {
+      alert('Please enter a name!');
+    }
+
+    if (emailCondition === false) {
+      alert('Please enter a valid email address!');
+    }
+
+    if (activityCondition === false) {
+      alert('Please select an activity to register for!');
+    }
+
+    if (paymentCondition === false) {
+      alert('Please select a form of payment!');
+    }
+
+    if ($('#payment option:selected').val() === 'credit card') {
+      $('#credit-card input[type="text"]').each(function (index, value) {
+        if ($(this).val().length === 0) {
+          alert(`Please fill out the necessary information at ${$(this).prev().text()} to submit this form!`);
+          $(this).addClass('failed');
+        }
+      });
+    }
   });
 
 });
